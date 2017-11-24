@@ -15,12 +15,23 @@ data Interval
   deriving Show
 
 interval :: Key -> Key -> Interval
-interval k1 k2
-  | k1 <= k2 = toEnum (fromEnum k2 - fromEnum k1)
-  | otherwise = toEnum (fromEnum k1 - fromEnum k2)
+interval k1 k2 = toEnum (fromEnum k2 - fromEnum k1)
 
-addInterval :: Key -> Interval -> Key
-addInterval k i = toEnum (fromEnum k + fromEnum i)
+intervals :: [Key] -> [Interval]
+intervals l = zipWith interval l (tail l)
+
+intervalsLooped :: [Interval] -> [Interval]
+intervalsLooped l = l ++ [12 - sum l]
+
+basedAt :: [Interval] -> Key -> [Key]
+basedAt ivs base = scanl (+:) base ivs
+
+(+:) :: Key -> Interval -> Key
+(+:) k i = toEnum (fromEnum k + fromEnum i)
+
+(-:) :: Key -> Interval -> Key
+(-:) k i = toEnum (fromEnum k - fromEnum i)
+
 
 instance Enum Interval where
   toEnum n = case n of
@@ -51,6 +62,15 @@ instance Enum Interval where
     MinorSeventh  -> 10
     MajorSeventh  -> 11
 
+instance Num Interval where
+  (+) = withNum2 (+)
+  (*) = withNum2 (*)
+  (-) = withNum2 (-)
+  negate = withNum1 negate
+  abs = withNum1 abs
+  signum = withNum1 signum
+  fromInteger = toEnum . fromInteger
+
 perfectOctave :: Interval
 perfectOctave = toEnum 12
 
@@ -59,4 +79,3 @@ minorNinth = toEnum 13
 
 majorNinth :: Interval
 majorNinth = toEnum 14
-

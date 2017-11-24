@@ -76,24 +76,26 @@ instance Num Key where
 instance Hashable Key where
   hashWithSalt s k = hashWithSalt s (fromEnum k)
 
-flatten :: Key -> Key
-flatten k = case k of
+flat :: Key -> Key
+flat k = case k of
   CSharp -> DFlat
   DSharp -> EFlat
   FSharp -> GFlat
+  GSharp -> AFlat
   ASharp -> BFlat
   _ -> k
 
-sharpen :: Key -> Key
-sharpen k = case k of
+sharp :: Key -> Key
+sharp k = case k of
   DFlat -> CSharp
   EFlat -> DSharp
   GFlat -> FSharp
+  AFlat -> GSharp
   BFlat -> ASharp
   _ -> k
 
-withNum1 :: (Int -> Int) -> Key -> Key
+withNum1 :: Enum e => (Int -> Int) -> e -> e
 withNum1 f = toEnum . f . fromEnum
 
-withNum2 :: (Int -> Int -> Int) -> Key -> Key -> Key
+withNum2 :: Enum e => (Int -> Int -> Int) -> e -> e -> e
 withNum2 f k1 k2 = toEnum (f (fromEnum k1) (fromEnum k2))
