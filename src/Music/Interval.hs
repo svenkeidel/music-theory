@@ -14,6 +14,8 @@ data Interval
   | MinorSeventh | MajorSeventh
   deriving Show
 
+
+
 interval :: Key -> Key -> Interval
 interval k1 k2 = toEnum (fromEnum k2 - fromEnum k1)
 
@@ -23,8 +25,8 @@ intervals l = zipWith interval l (tail l)
 intervalsLooped :: [Interval] -> [Interval]
 intervalsLooped l = l ++ [12 - sum l]
 
-basedAt :: [Interval] -> Key -> [Key]
-basedAt ivs base = scanl (+:) base ivs
+(@:) :: [Interval] -> Key -> [Key]
+(@:) ivs base = scanl (+:) base ivs
 
 (+:) :: Key -> Interval -> Key
 (+:) k i = toEnum (fromEnum k + fromEnum i)
@@ -41,7 +43,7 @@ instance Enum Interval where
     3  -> MinorThird
     4  -> MajorThird
     5  -> PerfectFourth
-    6  -> PerfectFourth
+    6  -> Tritone
     7  -> PerfectFifth
     8  -> MinorSixth
     9  -> MajorSixth

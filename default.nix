@@ -2,7 +2,7 @@
 
 let
   hsEnv = pkgs.haskellPackages.ghcWithPackages(p: with p; [
-    Cabal cabal-install hlint text containers hspec mtl
+    Cabal cabal-install hlint text containers hspec mtl roman-numerals
   ]);
 
 in pkgs.stdenv.mkDerivation {

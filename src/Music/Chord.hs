@@ -30,26 +30,29 @@ diminished = [MinorThird, MinorThird]
 augmented :: Chord
 augmented = [MajorThird, MajorThird]
 
-majorSixth :: Chord
-majorSixth = major <> [MajorSixth]
+suspended2 :: Chord
+suspended2 = [MajorSecond, PerfectFourth]
 
-minorSixth :: Chord
-minorSixth = minor <> [MajorSixth]
+suspended4 :: Chord
+suspended4 = [PerfectFourth, MajorSecond]
 
-dominantSeventh :: Chord
-dominantSeventh = major <> [MinorSeventh]
+major6 :: Chord
+major6 = major <> [MajorSecond]
 
-majorSeventh :: Chord
-majorSeventh = major <> [MajorSeventh]
+minor6 :: Chord
+minor6 = minor <> [MajorSecond]
 
-minorSeventh :: Chord
-minorSeventh = minor <> [MinorThird]
+dominant7 :: Chord
+dominant7 = major <> [MinorThird]
 
-diminishedSeventh :: Chord
-diminishedSeventh = diminished <> [MinorSeventh]
+major7 :: Chord
+major7 = major <> [MajorThird]
 
-augmentedSeventh :: Chord
-augmentedSeventh = augmented <> [MinorSeventh]
+minor7 :: Chord
+minor7 = minor <> [MinorThird]
 
-dominantNinth :: Chord
-dominantNinth = majorSeventh <> [majorNinth]
+diminished7 :: Chord
+diminished7 = diminished <> [MinorThird]
+
+augmented7 :: Chord
+augmented7 = augmented <> [MinorSeventh]
